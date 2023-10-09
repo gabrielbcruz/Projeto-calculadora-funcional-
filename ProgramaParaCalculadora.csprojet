@@ -1,0 +1,73 @@
+using System;
+
+namespace CalculadoraComHistorico
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculadora calculadora = new Calculadora();
+
+            while (true)
+            {
+                Console.WriteLine("Escolha uma operação:");
+                Console.WriteLine("1. Soma");
+                Console.WriteLine("2. Subtração");
+                Console.WriteLine("3. Multiplicação");
+                Console.WriteLine("4. Divisão");
+                Console.WriteLine("5. Mostrar Histórico");
+                Console.WriteLine("6. Sair");
+
+                int escolha;
+                if (!int.TryParse(Console.ReadLine(), out escolha) || escolha < 1 || escolha > 6)
+                {
+                    Console.WriteLine("Escolha uma opção válida.");
+                    continue;
+                }
+
+                if (escolha == 6)
+                {
+                    break;
+                }
+
+                int a, b;
+                Console.Write("Digite o primeiro número: ");
+                if (!int.TryParse(Console.ReadLine(), out a))
+                {
+                    Console.WriteLine("Digite um número válido.");
+                    continue;
+                }
+
+                Console.Write("Digite o segundo número: ");
+                if (!int.TryParse(Console.ReadLine(), out b))
+                {
+                    Console.WriteLine("Digite um número válido.");
+                    continue;
+                }
+
+                int resultado = 0;
+
+                switch (escolha)
+                {
+                    case 1:
+                        resultado = calculadora.Somar(a, b);
+                        break;
+                    case 2:
+                        resultado = calculadora.Subtrair(a, b);
+                        break;
+                    case 3:
+                        resultado = calculadora.Multiplicar(a, b);
+                        break;
+                    case 4:
+                        resultado = calculadora.Dividir(a, b);
+                        break;
+                    case 5:
+                        calculadora.MostrarHistorico();
+                        break;
+                }
+
+                Console.WriteLine($"Resultado: {resultado}");
+            }
+        }
+    }
+}
