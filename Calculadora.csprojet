@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+
+namespace CalculadoraComHistorico
+{
+    public class Calculadora
+    {
+        private List<string> historico = new List<string>();
+
+        public int Somar(int a, int b)
+        {
+            int resultado = a + b;
+            AdicionarAoHistorico($"{a} + {b} = {resultado}");
+            return resultado;
+        }
+
+        public int Subtrair(int a, int b)
+        {
+            int resultado = a - b;
+            AdicionarAoHistorico($"{a} - {b} = {resultado}");
+            return resultado;
+        }
+
+        public int Multiplicar(int a, int b)
+        {
+            int resultado = a * b;
+            AdicionarAoHistorico($"{a} * {b} = {resultado}");
+            return resultado;
+        }
+
+        public int Dividir(int a, int b)
+        {
+            if (b == 0)
+            {
+                Console.WriteLine("Erro: Divisão por zero.");
+                return 0;
+            }
+
+            int resultado = a / b;
+            AdicionarAoHistorico($"{a} / {b} = {resultado}");
+            return resultado;
+        }
+
+        public void MostrarHistorico()
+        {
+            Console.WriteLine("Histórico das últimas quatro operações:");
+            for (int i = Math.Max(0, historico.Count - 4); i < historico.Count; i++)
+            {
+                Console.WriteLine(historico[i]);
+            }
+        }
+
+        private void AdicionarAoHistorico(string operacao)
+        {
+            historico.Add(operacao);
+            if (historico.Count > 4)
+            {
+                historico.RemoveAt(0);
+            }
+        }
+    }
+}
